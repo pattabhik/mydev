@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author patta
+ *
+ */
+module javaPractice {
+}
