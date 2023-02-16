@@ -7,20 +7,18 @@ package com.maersk.containers.beans.request;
  *
  */
 public class BookingRequestResponseBean {
-	private Integer bookingRef;
+	private String bookingRef;
+
+	public BookingRequestResponseBean(String bookingRef) {
+		super();
+		this.bookingRef = bookingRef;
+	}
 
 	/**
 	 * @return the bookingRef
 	 */
-	public Integer getBookingRef() {
+	public String getBookingRef() {
 		return bookingRef;
-	}
-
-	/**
-	 * @param bookingRef the bookingRef to set
-	 */
-	public void setBookingRef(Integer bookingRef) {
-		this.bookingRef = bookingRef;
 	}
 
 }

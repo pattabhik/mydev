@@ -29,15 +29,15 @@ public class RestTemplateClientImpl implements RestTemplateClient {
 
 	private RestTemplate restTemplate;
 
-	private String mockEnabledKey;
+	private final String mockEnabledKey;
 
 	public RestTemplateClientImpl(int timoutMilSecnds, String mockEnabledKey) {
 		this.mockEnabledKey = mockEnabledKey;
-		var factory = new SimpleClientHttpRequestFactory();
+		SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
 		factory.setConnectTimeout(timoutMilSecnds);
 		factory.setReadTimeout(timoutMilSecnds);
 
-		restTemplate = new RestTemplate(factory);
+		this.restTemplate = new RestTemplate(factory);
 	}
 
 	/**

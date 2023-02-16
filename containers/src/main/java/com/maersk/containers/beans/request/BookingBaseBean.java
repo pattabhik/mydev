@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 
 import com.maersk.containers.enums.ContainerTypeEnum;
+import com.maersk.containers.validators.OneOfIntegers;
 
 /**
  * base bean of container booking
@@ -14,10 +15,10 @@ import com.maersk.containers.enums.ContainerTypeEnum;
  *
  */
 public class BookingBaseBean {
-	@Range(min = 20, max = 40, message = "The container size should be 20 or 40.")
+	@OneOfIntegers(values = { 20, 40 }, message = "The container size should be either 20 or 40.")
 	private Integer containerSize;
 
-	@NotNull
+	@NotNull(message = "Invalid Container Type.")
 	private ContainerTypeEnum containerType;
 
 	@Size(min = 5, max = 20, message = "The length of origin must be between 5 to 20 characters.")
@@ -88,6 +89,12 @@ public class BookingBaseBean {
 	 */
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	@Override
+	public String toString() {
+		return "BookingBaseBean [containerSize=" + containerSize + ", containerType=" + containerType + ", origin="
+				+ origin + ", destination=" + destination + ", quantity=" + quantity + "]";
 	}
 
 }

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  *
  */
 public class BookingRequestBean extends BookingBaseBean {
-	@NotNull
+	@NotNull(message = "Invalid Timestamp.")
 	private Timestamp timestamp;
 
 	/**

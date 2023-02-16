@@ -1,6 +1,8 @@
 package com.maersk.containers.exception;
 
 /**
+ * Custom exception class for DAO operations
+ * 
  * @author Pattabhi
  *
  */

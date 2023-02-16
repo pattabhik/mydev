@@ -1,6 +1,8 @@
 package com.maersk.containers.dao;
 
 /**
+ * This is to keep DAO related constants
+ * 
  * @author Pattabhi
  *
  */

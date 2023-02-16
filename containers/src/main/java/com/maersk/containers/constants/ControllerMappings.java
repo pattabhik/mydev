@@ -6,7 +6,7 @@ package com.maersk.containers.constants;
  * @author Pattabhi
  *
  */
-public interface ControllerConstants {
+public interface ControllerMappings {
 
 	String ROOT_CONTEXT_REQUEST_MAPPING = "/api/bookings/";
 
