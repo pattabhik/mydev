@@ -130,4 +130,10 @@ public class BookingRequestEntity {
 		this.timestamp = timestamp;
 	}
 
+	@Override
+	public String toString() {
+		return "BookingRequestEntity [bookingRef=" + bookingRef + ", containerType=" + containerType
+				+ ", containerSize=" + containerSize + ", origin=" + origin + ", destination=" + destination
+				+ ", quantity=" + quantity + ", timestamp=" + timestamp + "]";
+	}
 }

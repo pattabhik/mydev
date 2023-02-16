@@ -1,4 +1,4 @@
-package com.maersk.containers.resttemplate.response.bean;
+package com.maersk.containers.beans.response;
 
 /**
  * @author Pattabhi

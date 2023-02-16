@@ -1,10 +1,9 @@
 package com.maersk.containers.resttemplate;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import com.maersk.containers.constants.ControllerConstants;
+import com.maersk.containers.constants.ControllerMappings;
 
 /**
  * Rest client proxy implementation
@@ -12,14 +11,13 @@ import com.maersk.containers.constants.ControllerConstants;
  * @author Pattabhi
  *
  */
-@Component(ControllerConstants.REST_TEMPLATE_CLIENT_PROXY_QUALIFIER)
-@ConfigurationProperties
+@Component(ControllerMappings.REST_TEMPLATE_CLIENT_PROXY_QUALIFIER)
 public class RestTemplateClientProxy implements RestTemplateClient {
 
 	private RestTemplateClient restTmpltClient;
 
 	@Value("${rest.service.mock.enabled}")
-	private String mockEnabledKey;
+	private String mockEnabled;
 
 	@Value("${rest.service.connection.timeout.millisenconds}")
 	private int timoutMilSecnds;
@@ -27,7 +25,7 @@ public class RestTemplateClientProxy implements RestTemplateClient {
 	@Override
 	public Object invoke(String url, Object payload, Class<?> responseType) {
 		if (restTmpltClient == null) {
-			restTmpltClient = new RestTemplateClientImpl(timoutMilSecnds, mockEnabledKey);
+			restTmpltClient = new RestTemplateClientImpl(timoutMilSecnds, mockEnabled);
 		}
 
 		return restTmpltClient.invoke(url, payload, responseType);

@@ -1,6 +1,8 @@
 package com.maersk.containers.constants;
 
 /**
+ * This is to keep all the constants of exception classes
+ * 
  * @author Pattabhi
  *
  */
