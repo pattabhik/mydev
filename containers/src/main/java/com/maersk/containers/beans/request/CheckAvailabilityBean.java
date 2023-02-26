@@ -1,6 +1,4 @@
-package com.maersk.containers.beans.response;
-
-import com.maersk.containers.beans.request.BookingBaseBean;
+package com.maersk.containers.beans.request;
 
 /**
  * Check availability request bean
