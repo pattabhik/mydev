@@ -1,4 +1,4 @@
-package com.maersk.containers.beans.request;
+package com.maersk.containers.beans.response;
 
 /**
  * Booking request's response bean
@@ -14,9 +14,6 @@ public class BookingRequestResponseBean {
 		this.bookingRef = bookingRef;
 	}
 
-	/**
-	 * @return the bookingRef
-	 */
 	public String getBookingRef() {
 		return bookingRef;
 	}

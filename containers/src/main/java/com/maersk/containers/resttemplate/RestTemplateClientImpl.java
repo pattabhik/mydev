@@ -40,13 +40,6 @@ public class RestTemplateClientImpl implements RestTemplateClient {
 		this.restTemplate = new RestTemplate(factory);
 	}
 
-	/**
-	 * 
-	 * @param <T>
-	 * @param <R>
-	 * @param request
-	 * @param response
-	 */
 	@Override
 	public Object invoke(final String url, final Object payload, final Class<?> responseType) {
 		ResponseEntity<?> resp = null;
@@ -63,11 +56,6 @@ public class RestTemplateClientImpl implements RestTemplateClient {
 		return getResponse(resp);
 	}
 
-	/**
-	 * 
-	 * @param payload
-	 * @return
-	 */
 	private HttpEntity<Object> getRequestBody(final Object payload) {
 		final HttpHeaders reqHdrs = new HttpHeaders();
 		reqHdrs.setContentType(MediaType.APPLICATION_JSON);

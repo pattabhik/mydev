@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 
 /**
- * Booking request request bean
+ * Booking request bean
  * 
  * @author Pattabhi
  *
@@ -15,16 +15,6 @@ public class BookingRequestBean extends BookingBaseBean {
 	@NotNull(message = "Invalid Timestamp.")
 	private Timestamp timestamp;
 
-	/**
-	 * @return the timestamp
-	 */
-	public Timestamp getTimestamp() {
-		return timestamp;
-	}
-
-	/**
-	 * @param timestamp the timestamp to set
-	 */
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}

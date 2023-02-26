@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maersk.containers.beans.request.BookingRequestBean;
-import com.maersk.containers.beans.request.BookingRequestResponseBean;
-import com.maersk.containers.beans.response.CheckAvailabilityBean;
+import com.maersk.containers.beans.request.CheckAvailabilityBean;
+import com.maersk.containers.beans.response.BookingRequestResponseBean;
 import com.maersk.containers.beans.response.CheckAvailabilityResponse;
 import com.maersk.containers.beans.response.CheckAvailabilityResponseBean;
 import com.maersk.containers.constants.ControllerMappings;
@@ -46,17 +46,17 @@ public class BookingController {
 	/**
 	 * post request mapping for checking the availability of container
 	 * 
-	 * @param bean
+	 * @param chkAvlbltyBean
 	 * @param result
 	 * @return
 	 */
 	@PostMapping(value = ControllerMappings.CHECK_CONTAINER_AVAILABILITY_REQUEST_MAPPING, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Mono<ResponseEntity<CheckAvailabilityResponseBean>> checkAvailability(
-			@RequestBody @Valid CheckAvailabilityBean bean)
+			@RequestBody @Valid CheckAvailabilityBean chkAvlbltyBean)
 	{
 		LoggerUtil.info(LOG, "checkAvailability request");
 		final CheckAvailabilityResponseBean respBean = new CheckAvailabilityResponseBean();
-		final CheckAvailabilityResponse srvcCalRspns = bkngSrvc.checkAvailability(bean);
+		final CheckAvailabilityResponse srvcCalRspns = bkngSrvc.checkAvailability(chkAvlbltyBean);
 		if (srvcCalRspns != null && srvcCalRspns.getAvailableSpace() > 0) {
 			respBean.setAvailable(true);
 		}
@@ -66,15 +66,15 @@ public class BookingController {
 	/**
 	 * post request mapping for saving the booking request
 	 * 
-	 * @param bean
+	 * @param bookRqstBean
 	 * @param result
 	 * @return
 	 */
 	@PostMapping(value = ControllerMappings.BOOK_CONTAINER_REQUEST_MAPPING, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Mono<ResponseEntity<BookingRequestResponseBean>> bookContainer(@RequestBody @Valid BookingRequestBean bean)
+	public Mono<ResponseEntity<BookingRequestResponseBean>> bookContainer(@RequestBody @Valid BookingRequestBean bookRqstBean)
 	{
 		LoggerUtil.info(LOG, "bookContainer request");
-		final BookingRequestEntity entity = bkngSrvc.createContainerRequest(bean);
+		final BookingRequestEntity entity = bkngSrvc.createContainerRequest(bookRqstBean);
 		return Mono.just(new ResponseEntity<>(new BookingRequestResponseBean(String.valueOf(entity.getBookingRef())),
 				HttpStatus.OK));
 	}
