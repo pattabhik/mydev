@@ -1,0 +1,16 @@
+spring:
+ data:
+  cassandra:
+   keyspace-name: containerBookingKeySpace
+   port: 9042
+   contact-points: 127.0.0.1
+
+rest.service.mock.enabled: Y
+rest.service.connection.timeout.millisenconds: 5000
+
+#this is configured in the properties file to be able to configure different url based on the environment
+external.service.url.check.availability: https://maersk.com/api/bookings/checkAvailable
+
+external.booking.service.baseurl: https://maersk.com/api/bookings/
+
+server.error.include-binding-errors: ALWAYS

@@ -25,6 +25,13 @@ public class StreamsDemo {
 		Stream<Integer> numbers1 = Stream.of(1, 2, 3, 4, 5);
 		Stream<Integer> numbers2 = Stream.ofNullable(100);
 
+		Stream<Integer> intStrm = Stream.of(222, 25, 46, 17, 28, 33, 70);
+		Optional<Integer> sumOfSqr = intStrm.map(intVal -> intVal * intVal)
+				.reduce((sqrdVal, sqrdVal2) -> sqrdVal + sqrdVal2);
+		intStrm = Stream.of(222, 25, 46, 17, 28, 33, 70);
+		intStrm.map(intVal -> intVal * intVal).forEach(eachVal -> System.out.println(eachVal));
+		System.out.println("sumOfSqr: " + sumOfSqr.get());
+
 		CustomePredicate custPrd = new CustomePredicate();
 		System.out.println(custPrd.test("Pattabhi"));
 		Optional<Integer> optnInt = numbers.reduce((i, j) -> i * j);

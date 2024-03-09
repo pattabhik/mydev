@@ -13,6 +13,4 @@ public interface ControllerMappings {
 	String CHECK_CONTAINER_AVAILABILITY_REQUEST_MAPPING = "/check-container-availability";
 	String BOOK_CONTAINER_REQUEST_MAPPING = "/book-container";
 
-	String REST_TEMPLATE_CLIENT_PROXY_QUALIFIER = "RestTemplateClientProxy";
-
 }

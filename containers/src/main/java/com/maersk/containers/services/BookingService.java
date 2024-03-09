@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -12,14 +11,15 @@ import org.springframework.stereotype.Service;
 import com.maersk.containers.beans.request.BookingRequestBean;
 import com.maersk.containers.beans.request.CheckAvailabilityBean;
 import com.maersk.containers.beans.response.CheckAvailabilityResponse;
-import com.maersk.containers.constants.ControllerMappings;
 import com.maersk.containers.constants.ExceptionConstants;
 import com.maersk.containers.dao.BookingDAO;
 import com.maersk.containers.dao.BookingRefIdGenerator;
 import com.maersk.containers.entity.BookingRequestEntity;
 import com.maersk.containers.exception.DAOException;
 import com.maersk.containers.log.LoggerUtil;
-import com.maersk.containers.resttemplate.RestTemplateClient;
+import com.maersk.containers.resttemplate.RestService;
+
+import reactor.core.publisher.Mono;
 
 /**
  * Booking Service class
@@ -33,8 +33,7 @@ public class BookingService {
 	private static final Logger LOG = LoggerFactory.getLogger(BookingService.class);
 
 	@Autowired
-	@Qualifier(ControllerMappings.REST_TEMPLATE_CLIENT_PROXY_QUALIFIER)
-	private transient RestTemplateClient restTemplt;
+	private transient RestService restSrvc;
 
 	@Autowired
 	private transient BookingDAO bookingDAO;
@@ -49,8 +48,8 @@ public class BookingService {
 	 * @return
 	 */
 	@Cacheable(cacheNames = "containersSearch", keyGenerator = "searchKeyGenerator")
-	public CheckAvailabilityResponse checkAvailability(final CheckAvailabilityBean chkAvlbltyBean) {
-		return (CheckAvailabilityResponse) restTemplt
+	public Mono<CheckAvailabilityResponse> checkAvailability(final CheckAvailabilityBean chkAvlbltyBean) {
+		return (Mono<CheckAvailabilityResponse>) restSrvc
 				.invoke(checkAvlbltyUrl, chkAvlbltyBean, CheckAvailabilityResponse.class);
 	}
 

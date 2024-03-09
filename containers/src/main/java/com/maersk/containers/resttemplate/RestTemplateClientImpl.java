@@ -4,13 +4,14 @@ import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import com.maersk.containers.constants.ContainerConstants;
@@ -23,31 +24,25 @@ import com.maersk.containers.log.LoggerUtil;
  * @author Pattabhi
  *
  */
-public class RestTemplateClientImpl implements RestTemplateClient {
+//@Component
+public class RestTemplateClientImpl implements RestService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(RestTemplateClientImpl.class);
 
+	@Autowired
 	private RestTemplate restTemplate;
 
-	private final String mockEnabledKey;
-
-	public RestTemplateClientImpl(int timoutMilSecnds, String mockEnabledKey) {
-		this.mockEnabledKey = mockEnabledKey;
-		SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-		factory.setConnectTimeout(timoutMilSecnds);
-		factory.setReadTimeout(timoutMilSecnds);
-
-		this.restTemplate = new RestTemplate(factory);
-	}
-
+	@Value("${rest.service.mock.enabled}")
+	private String mockEnabled;
+	
 	@Override
 	public Object invoke(final String url, final Object payload, final Class<?> responseType) {
 		ResponseEntity<?> resp = null;
 		try {
-			resp = this.restTemplate.exchange(url, HttpMethod.POST, getRequestBody(payload), responseType);
+			resp = restTemplate.exchange(url, HttpMethod.POST, getRequestBody(payload), responseType);
 		} catch (Exception exp) {
 			// mocking only based on the flag,not for every environment
-			if (ContainerConstants.FLAG_Y.equalsIgnoreCase(this.mockEnabledKey)) {
+			if (ContainerConstants.FLAG_Y.equalsIgnoreCase(mockEnabled)) {
 				resp = new MockResponse().getResponse(url, responseType);
 			}
 			LoggerUtil.error(LOG, exp,
