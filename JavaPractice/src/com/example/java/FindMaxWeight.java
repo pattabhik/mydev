@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class FindMaxWeight {
@@ -46,7 +45,7 @@ public class FindMaxWeight {
 	}
 
 	public static void failSafe() {
-		ConcurrentHashMap<String, String> empName = new ConcurrentHashMap<String, String>();
+		java.util.concurrent.ConcurrentHashMap<String, String> empName = new java.util.concurrent.ConcurrentHashMap<String, String>();
 		empName.put("Sam Hanks", "New york");
 		empName.put("Will Smith", "LA");
 		empName.put("Scarlett", "Chicago");
@@ -85,7 +84,7 @@ public class FindMaxWeight {
 	}
 
 	public static void failSafeList() {
-		ConcurrentHashMap<String, String> empName = new ConcurrentHashMap<String, String>();
+		java.util.concurrent.ConcurrentHashMap<String, String> empName = new java.util.concurrent.ConcurrentHashMap<String, String>();
 		empName.put("Sam Hanks", "New york");
 		empName.put("Will Smith", "LA");
 		empName.put("Scarlett", "Chicago");

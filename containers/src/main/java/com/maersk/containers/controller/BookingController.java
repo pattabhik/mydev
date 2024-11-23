@@ -56,10 +56,11 @@ public class BookingController {
 	{
 		LoggerUtil.info(LOG, "checkAvailability request");
 		final CheckAvailabilityResponseBean respBean = new CheckAvailabilityResponseBean();
-		final CheckAvailabilityResponse srvcCalRspns = bkngSrvc.checkAvailability(chkAvlbltyBean);
-		if (srvcCalRspns != null && srvcCalRspns.getAvailableSpace() > 0) {
-			respBean.setAvailable(true);
-		}
+		final Mono<CheckAvailabilityResponse> srvcCalRspns = bkngSrvc.checkAvailability(chkAvlbltyBean);
+		/*
+		 * srvcCalRspns.subscribe(availability if (availability.getAvailableSpace() > 0)
+		 * { respBean.setAvailable(true); } );
+		 */
 		return Mono.just(new ResponseEntity<>(respBean, HttpStatus.OK));
 	}
 

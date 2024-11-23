@@ -20,45 +20,45 @@ public class MockResponse {
 
 	private static final Logger LOG = LoggerFactory.getLogger(MockResponse.class);
 	
-	/**
-	 * 
-	 * @param url
-	 * @param responseType
-	 * @return
-	 */
 	public ResponseEntity<?> getResponse(final String url, final Class<?> responseType) {
+		String strResp = null;
+		switch (url) {
+		case RestClientConstant.CHECK_AVAILABLE_URL:
+
+			strResp = getCheckAvailabilityResponseJson();
+		}
+
+		return convertToResponseEntity(strResp, responseType);
+	}
+
+	public Object getMockResponse(final String url, final Class<?> responseType) {
 		String strResp = null;
 		switch (url) {
 		case RestClientConstant.CHECK_AVAILABLE_URL:
 			strResp = getCheckAvailabilityResponseJson();
 		}
 
-		return getCheckAvailabilityResponse(strResp, responseType);
+		return convertJsonToObject(strResp, responseType);
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	private String getCheckAvailabilityResponseJson() {
 		return "{\"availableSpace\" : 6}";
 	}
 
-	/**
-	 * 
-	 * @param respJson
-	 * @param responseType
-	 * @return
-	 */
-	private ResponseEntity<?> getCheckAvailabilityResponse(final String respJson, final Class<?> responseType) {
-		ResponseEntity<?> respEntity = null;
+	private ResponseEntity<?> convertToResponseEntity(final String respJson, final Class<?> responseType) {
+		return new ResponseEntity<>(convertJsonToObject(respJson, responseType), HttpStatus.OK);
+	}
+
+	private Object convertJsonToObject(final String respJson, final Class<?> responseType) {
+		Object rtrnObjct = null;
 		try {
+
 			ObjectMapper mapper = new ObjectMapper();
-			respEntity = new ResponseEntity<>(mapper.readValue(respJson, responseType), HttpStatus.OK);
+			rtrnObjct = mapper.readValue(respJson, responseType);
 		} catch (JsonProcessingException exp) {
 			LoggerUtil.error(LOG, exp, "Exception in converting mock json string to object");
 		}
-		return respEntity;
+		return rtrnObjct;
 	}
 
 }
