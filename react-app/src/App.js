@@ -49,6 +49,24 @@ function App() {
           )
         }}
       />*/}
+    {/*  <h1>Welcome to ReactJS learning!!</h1><br/>      
+      <FunctionalC/><br/>
+      <ClassC/><br/>
+      <Hello name='Pattabhi'>Inner content</Hello>
+      <Hello name='Pattabhi2'/>
+      <Hello name='Pattabhi4'/>
+      <ClassProps name='ClassProps'/>
+      <ClassStateC/> 
+      <Counter/> 
+      <DestructingFunProps name1='Pattabhi' name2='Ramaiah'/>
+      <DestructingClassProps name1='Janaki' name2='Ramu'/>
+      <FunctionEvent/>
+      <ClassEvent/>
+      <ParentC/> 
+      <ConditionFC/>
+      <ListIteration/>
+      <LifecycleA/>
+      <PostForm/>*}
     </div>
   )
 }
